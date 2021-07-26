@@ -4,7 +4,7 @@ node {
         }
         stage('checkout') {
             
-                 echo 'copying...'
+                 echo 'Copying...'
                 git 'https://github.com/deathsh0ot/nodetestApp.git'
             
         }
