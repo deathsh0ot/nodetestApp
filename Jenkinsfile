@@ -27,7 +27,7 @@ node {
     }
   }
   stage("building image") {
-        sh 'docker build -t node-appj . '
+        sh 'docker build -t node-appj /var/lib/jenkins/workspace/nodeApp/simple-node-js-react-npm-app/Dockerfile '
       }
   stage("run") {
         sh ' docker run --rm -p 3000:3000 node-appj'
