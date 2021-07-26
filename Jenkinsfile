@@ -27,14 +27,11 @@ node {
     }
   }
   stage("building image") {
-        sh """
-          docker build -t node-appj .
-        """
+        sh 'docker build -t node-appj . '
       }
   stage("run") {
-        sh """
-          docker run --rm -p 3000:3000 node-appj
-        """
+        sh ' docker run --rm -p 3000:3000 node-appj'
+        
       }
     
 }
