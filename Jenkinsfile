@@ -1,31 +1,40 @@
-pipeline {
-    agent {
-        docker {
-            image 'node:6-alpine'
-            args '-p 3000:3000'
-        }
-    }
+node {
      environment {
             CI = 'true'
         }
-    stages {
+        stage('checkout') {
+            
+                 echo 'copying...'
+                git 'https://github.com/deathsh0ot/nodetestApp.git'
+            
+        }
         stage('Build') {
-            steps {
+            
                 sh 'npm install'
-            }
+            
         }
         stage('Test') {
-                    steps {
+                
                         sh './jenkins/scripts/test.sh'
-                    }
+                    
                 }
-                stage('Deliver') {
-                            steps {
-                                sh './jenkins/scripts/deliver.sh'
-                                input message: 'Finished using the web site? (Click "Proceed" to continue)'
-                                sh './jenkins/scripts/kill.sh'
-                            }
-                        }
-
+        stage('SonarQube analysis') {
+             
+            def scannerHome = tool 'sonar_scanner';
+            withSonarQubeEnv('SonarQ') {
+            sh "${scannerHome}/bin/sonar-scanner  -Dsonar.projectKey=develop"
+            
     }
+  }
+  stage("building image") {
+        sh """
+          docker build -t node-appj .
+        """
+      }
+  stage("run") {
+        sh """
+          docker run --rm -p 3000:3000 node-appj
+        """
+      }
+    
 }
