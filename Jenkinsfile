@@ -27,7 +27,7 @@ node {
     }
   }
   stage("building image") {
-        sh 'docker build -t nodeappj ${WORKSPACE}/src/Dockerfile'
+        sh 'docker build -t nodeappj ${WORKSPACE}/Dockerfile'
       }
   stage("run") {
         sh ' docker run --rm -p 3000:3000 nodeappj'
