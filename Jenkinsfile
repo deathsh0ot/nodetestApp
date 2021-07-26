@@ -27,7 +27,7 @@ node {
     }
   }
   stage("building image") {
-        sh 'docker build -f -t nodeappj /var/lib/jenkins/workspace/nodeApp/'
+        sh 'docker build -t nodeappj .'
       }
   stage("run") {
         sh ' docker run --rm -p 3000:3000 nodeappj'
