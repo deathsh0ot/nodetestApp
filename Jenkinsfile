@@ -30,7 +30,8 @@ node {
         sh ' docker build -t nodeappj ${WORKSPACE}/ '
       }
   stage("run") {
-        sh ' sudo docker run --rm -p 3000:3000 nodeappj'
+        sh 'docker rm -f backEnd || true'
+        sh 'docker run -d --name backEnd  3000:3000 nodeappj'
         
       }
     
