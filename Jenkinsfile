@@ -31,7 +31,7 @@ node {
       }
   stage("run") {
         sh 'docker rm -f backEnd || true'
-        sh 'docker run -d --name backEnd  3000:3000 nodeappj'
+        sh 'docker run -d --name backEnd  -p 3000:3000 nodeappj'
         
       }
     
