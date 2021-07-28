@@ -22,7 +22,7 @@ node {
              
             def scannerHome = tool 'sonar_scanner';
             withSonarQubeEnv('SonarQ') {
-            sh "${scannerHome}/bin/sonar-scanner  -Dsonar.projectKey=develop"
+            sh "${scannerHome}/bin/sonar-scanner  -Dsonar.projectKey=nodeApp"
             
     }
   }
